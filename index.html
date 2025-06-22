@@ -839,29 +839,16 @@
                     <div class="portfolio-overlay">
                         <h3>E-commerce Dashboard</h3>
                         <p>A modern dashboard design for an e-commerce platform with analytics and inventory management.</p>
-                        <!-- Button -->
-                        <a href="#" class="btn view-case-study" data-project="ecommerce">View Case Study</a>
+                        <div class="portfolio-item" data-category="ui">
+                          <img src="https://via.placeholder.com/600x400" alt="E-commerce Dashboard" class="portfolio-img">
+                          <div class="portfolio-overlay">
+                        <h3>E-commerce Dashboard</h3>
+                      <p>A modern dashboard design for an e-commerce platform...</p>
+                      <!-- Ganti # dengan link case study -->
+                      <a href="case-study/ecommerce.html" class="btn">View Case Study</a>
+                    </div>
+                </div>
                         
-                        <!-- Modal (taruh sebelum </body>) -->
-                         <div id="case-study-modal" style="display:none;">
-                          <h2 id="modal-title"></h2>
-                          <p id="modal-content"></p>
-                        </div>
-
-                       <script>
-                         document.querySelectorAll('.view-case-study').forEach(btn => {
-                          btn.addEventListener('click', (e) => {
-                          e.preventDefault();
-                           const project = e.target.getAttribute('data-project');
-                           // Tampilkan data sesuai project (bisa dari JS atau API)
-                           if (project === 'ecommerce') {
-                              document.getElementById('modal-title').textContent = 'E-commerce Dashboard';
-                              document.getElementById('modal-content').textContent = 'Analisis lengkap desain dashboard...';
-                           }
-                           document.getElementById('case-study-modal').style.display = 'block';
-                             });
-                           });
-                        </script>
                     </div>
                 </div>
                 
