@@ -659,6 +659,51 @@
                 font-size: 2rem;
             }
         }
+
+        /* Modal Style */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+            animation: fadeIn 0.3s;
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            max-width: 800px;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 35px;
+            color: var(--dark-color);
+            cursor: pointer;
+        }
+
+        #modal-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }        
     </style>
 </head>
 <body>
@@ -839,7 +884,12 @@
                     <div class="portfolio-overlay">
                         <h3>E-commerce Dashboard</h3>
                         <p>A modern dashboard design for an e-commerce platform with analytics and inventory management.</p>
-                        <a href="#" class="btn">View Case Study</a>
+                        <button class="btn view-details"
+                            data-image="https://via.placeholder.com/600x400"
+                            data-title="E-commerce Dashboard"
+                            data-description="A modern dashboard design for an e-commerce platform with analytics and inventory management.">
+                        View Details
+                        </button>
                     </div>
                 </div>
                     
@@ -885,6 +935,16 @@
                         <h3>SaaS Platform UX</h3>
                         <p>Improving the onboarding experience for a complex B2B software product.</p>
                         <a href="#" class="btn">View Case Study</a>
+                    </div>
+                </div>
+
+                <!-- Modal Popup -->
+                <div id="portfolio-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <img id="modal-image" src="" alt="">
+                        <h2 id="modal-title"></h2>
+                        <p id="modal-description"></p>
                     </div>
                 </div>
             </div>
@@ -1117,6 +1177,26 @@
             const header = document.querySelector('header');
             header.style.boxShadow = window.scrollY > 10 ? 
                 '0 2px 10px rgba(0, 0, 0, 0.1)' : 'none';
+        });
+
+        // Modal Functionality
+        const modal = document.getElementById('portfolio-modal');
+        const closeBtn = document.querySelector('.close-modal');
+        const viewButtons = document.querySelectorAll('.view-details');
+
+        viewButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const imgSrc = this.getAttribute('data-image');
+                const title = this.getAttribute('data-title');
+                const description = this.getAttribute('data-description');
+
+                document.getElementById('modal-image').src = imgSrc;
+                document.getElementById('modal-title').textContent = title;
+                document.getElementById('modal-description').textContent = description;
+
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            });
         });
     </script>
 </body>
