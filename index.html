@@ -681,6 +681,7 @@
             max-width: 800px;
             border-radius: 15px;
             position: relative;
+            animation: slideUp 0.4s ease-out;
         }
 
         .close-modal {
@@ -690,6 +691,12 @@
             font-size: 35px;
             color: var(--dark-color);
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-model:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
         }
 
         #modal-image {
@@ -705,11 +712,7 @@
             to {opacity: 1;}
         }        
 
-         .modal-content {
-            animation: slideUp 0.4s ease-out;
-        }
-
-        @keyFrames slideUp {
+        @keyframes slideUp {
             from { transform: translateY(50px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
@@ -1193,19 +1196,39 @@
         const closeBtn = document.querySelector('.close-modal');
         const viewButtons = document.querySelectorAll('.view-details');
 
+        // Fungsi untuk menutup modal
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        //Fungsi untuk membuka modal
+        function openModal(imgSrc, title, description) {
+            document.getElementById('modal-image').src = imgSrc;
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-description').textContent = description;
+            modal.style.display = 'block' ;
+            document.body.style.overflow = 'hidden' ;
+        }
+
+        // Event listener untuk tombol view details
         viewButtons.forEach(btn => {
             btn.addEventListener('click', function() {
                 const imgSrc = this.getAttribute('data-image');
                 const title = this.getAttribute('data-title');
                 const description = this.getAttribute('data-description');
-
-                document.getElementById('modal-image').src = imgSrc;
-                document.getElementById('modal-title').textContent = title;
-                document.getElementById('modal-description').textContent = description;
-
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden'; // Prevent scrolling
+                openModal(imgSrc, title, description);
             });
+        });
+
+        // Event listener untuk tombol close
+        closeBtn.addEventListener('click', closeModal);
+
+        // Tutup modal ketika klik di luar konten modal
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
         });
     </script>
 </body>
